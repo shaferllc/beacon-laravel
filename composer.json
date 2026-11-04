@@ -1,0 +1,58 @@
+{
+    "name": "beacon-status/laravel",
+    "description": "Laravel integration for Beacon status pages: service provider, facade, heartbeat command, scheduler macro and webhook signature middleware.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["beacon", "laravel", "status-page", "incidents", "heartbeat", "webhooks"],
+    "homepage": "https://usebeacon.pro/docs/sdk-laravel",
+    "require": {
+        "php": "^8.2",
+        "beacon-status/beacon-php": "^1.0",
+        "illuminate/console": "^11.0|^12.0|^13.0",
+        "illuminate/http": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^11.0|^12.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../php",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "beacon-status/beacon-php": "1.0.0"
+                }
+            }
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Beacon\\Laravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Beacon\\Laravel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Beacon\\Laravel\\BeaconServiceProvider"
+            ],
+            "aliases": {
+                "Beacon": "Beacon\\Laravel\\Facades\\Beacon"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}

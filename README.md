@@ -7,17 +7,17 @@ Laravel 11–13 integration for [Beacon](https://usebeacon.pro), built on [`beac
 - Scheduler macro `->pingBeacon($token)` (pings only when the task succeeds)
 - `beacon.webhook` route middleware that verifies `X-Beacon-Signature`
 
-> **Not yet published to Packagist.** Until it is, clone https://github.com/shaferllc/beacon next to your app and add both packages as Composer `path` repositories:
+> **Not yet published to Packagist.** Until it is, add both packages as Composer `vcs` repositories (or `path` repositories pointing at local clones):
 >
 > ```jsonc
 > // your app's composer.json
 > "repositories": [
->     { "type": "path", "url": "../beacon/sdks/php", "options": { "symlink": false } },
->     { "type": "path", "url": "../beacon/sdks/laravel", "options": { "symlink": false } }
+>     { "type": "vcs", "url": "https://github.com/shaferllc/beacon-php" },
+>     { "type": "vcs", "url": "https://github.com/shaferllc/beacon-laravel" }
 > ],
 > "require": {
->     "beacon-status/beacon-php": "@dev",
->     "beacon-status/laravel": "@dev"
+>     "beacon-status/beacon-php": "^1.0",
+>     "beacon-status/laravel": "^1.0"
 > }
 > ```
 

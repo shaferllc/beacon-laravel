@@ -5,8 +5,8 @@
 # beacon-status/beacon-php must already be on Packagist (release it first). GitHub only runs
 # workflows from the repository root, so this file is inert inside the monorepo.
 #
-# In the split repo, drop the "repositories" path entry from composer.json (../php won't exist;
-# Composer then installs beacon-php from Packagist — the path repo is only used in the monorepo).
+# composer.json carries a "../php" path repository for monorepo development. The split repo is
+# overwritten on every split, so the workflow swaps it for the beacon-php GitHub repo before installing.
 # Required secrets (not configured yet): PACKAGIST_USERNAME, PACKAGIST_TOKEN.
 name: Release
 
@@ -27,6 +27,8 @@ jobs:
           php-version: '8.3'
           extensions: curl, json
           coverage: none
+      - name: Replace the monorepo path repository
+        run: jq '.repositories = [{"type": "vcs", "url": "https://github.com/shaferllc/beacon-php"}]' composer.json > composer.tmp && mv composer.tmp composer.json
       - run: composer install --no-interaction --prefer-dist
       - run: vendor/bin/phpunit
       - name: GitHub release
